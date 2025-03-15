@@ -12,6 +12,17 @@ import java.util.List;
 
 public class Utility {
     public static List<List<Double>> loadCentroidsFromFile(JobConf job) throws IOException {
+
+        // case 1 - the initial job should work using  randomly initialized centroids.
+        boolean isInitialJob = job.getBoolean("isInitialJob", false);
+        if (isInitialJob) {
+            return generateRandomCentroids(
+                    job.getInt("numberOfCentroids", 3),
+                    job.getInt("featureVectorSize", 4)
+            );
+        }
+
+        // case 2 - work using the previous job centroids.
         Path path = new Path(job.get("centroidsFp"));
         FileSystem fs = path.getFileSystem(job);
         BufferedReader reader = new BufferedReader(new InputStreamReader(fs.open(path)));
@@ -80,6 +91,18 @@ public class Utility {
         }
 
         return featureVectorList;
+    }
+
+    public static List<List<Double>> generateRandomCentroids(int centroidsCount, int featureVectorSize) {
+        List<List<Double>> centroids = new ArrayList<>();
+        for (int i = 0; i < centroidsCount; i++) {
+            List<Double> centroid = new ArrayList<>();
+            for (int j = 0; j < featureVectorSize; j++) {
+                centroid.add(Math.random());
+            }
+            centroids.add(centroid);
+        }
+        return centroids;
     }
 
 }
