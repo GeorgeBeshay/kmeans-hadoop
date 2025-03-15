@@ -36,7 +36,7 @@ public class Combiner extends MapReduceBase implements Reducer<IntWritable, Text
 
         StringBuilder centroidString = new StringBuilder();
         // put the data points count as the first element in this string.
-        centroidString.append(dataPointsCount);
+        centroidString.append(dataPointsCount).append(",");
 
         // finally, append the partial centroid dimensions.
         for (int i = 0; i < Objects.requireNonNull(currentCentroid).length; i++) {

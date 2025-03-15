@@ -19,11 +19,7 @@ public class Mapper extends MapReduceBase implements org.apache.hadoop.mapred.Ma
     @Override
     public void configure(JobConf job) {
         super.configure(job);
-        try {
-            centroids = Utility.loadCentroidsFromFile(job);
-        } catch (IOException e) {
-            System.out.println(e);
-        }
+        centroids = Utility.parseCentroidsFromStringAttribute(job);
     }
 
     @Override
