@@ -1,4 +1,4 @@
-package org.ds;
+package org.ds.kmeans.centroids;
 
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
@@ -30,7 +30,7 @@ public class Combiner extends MapReduceBase implements Reducer<IntWritable, Text
                 currentCentroid = new double[tempDimensions.length];
             }
             for (int i = 0; i < tempDimensions.length; i++) {
-                currentCentroid[i] = Double.parseDouble(tempDimensions[i]);
+                currentCentroid[i] += Double.parseDouble(tempDimensions[i]);
             }
         }
 

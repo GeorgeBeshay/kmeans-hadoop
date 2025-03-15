@@ -2,7 +2,7 @@ plugins {
     id("java")
 }
 
-group = "org.ds"
+group = "org.ds.kmeans"
 version = "1.0-SNAPSHOT"
 
 repositories {

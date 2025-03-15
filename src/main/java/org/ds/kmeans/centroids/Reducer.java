@@ -1,10 +1,9 @@
-package org.ds;
+package org.ds.kmeans.centroids;
 
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapred.MapReduceBase;
 import org.apache.hadoop.mapred.OutputCollector;
-import org.apache.hadoop.mapred.Reducer;
 import org.apache.hadoop.mapred.Reporter;
 
 import java.io.IOException;
@@ -13,7 +12,7 @@ import java.util.Objects;
 
 // Global reducer. It reduces all the partial results being passed from each local combiner
 // to compute the final centroids.
-public class Reduce extends MapReduceBase implements Reducer<IntWritable, Text, IntWritable, Text> {
+public class Reducer extends MapReduceBase implements org.apache.hadoop.mapred.Reducer<IntWritable, Text, IntWritable, Text> {
 
     @Override
     public void reduce(IntWritable centroidIdx, Iterator<Text> partialDimensions, OutputCollector<IntWritable, Text> outputCollector, Reporter reporter) throws IOException {
