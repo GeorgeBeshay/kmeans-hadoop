@@ -53,7 +53,10 @@ public class Driver {
         conf.setOutputValueClass(Text.class);
 
         currentCentroids = Utility.loadCentroidsFromFile(conf);
-        JobClient.runJob(conf);
+        boolean jobWasSuccessful = JobClient.runJob(conf).isSuccessful();
+        if (!jobWasSuccessful) {
+            throw new RuntimeException("Job failed.");
+        }
         newCentroids = Utility.loadCentroidsFromFile(conf);
         // the same file should now be updated with the new centroids.
 
@@ -78,7 +81,10 @@ public class Driver {
         conf.setOutputKeyClass(Text.class);
         conf.setOutputValueClass(Text.class);
 
-        JobClient.runJob(conf);
+        boolean jobWasSuccessful = JobClient.runJob(conf).isSuccessful();
+        if (!jobWasSuccessful) {
+            throw new RuntimeException("Job failed.");
+        }
     }
 
 }
